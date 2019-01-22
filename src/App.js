@@ -1,27 +1,48 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import PatientView from './Patient.js'
+import DoctorView from './Doctor.js'
+
+
+ 
 
 class App extends Component {
+
+  constructor(p) {
+    super(p)
+    this.state = {currentView: 0}
+    this.setState = this.setState.bind(this)
+  }
+  
+ ViewFactory(p) {
+ 
+  }
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+      switch (this.state.currentView) {
+      case 0:
+        return (
+          <div className="App">
+            <h1>Choose View:</h1>
+            <button id="chooseView" onClick={() => this.setState({currentView: 1})}>Patient</button><br></br>
+            <button id="chooseView" onClick={() => this.setState({currentView: 2})}>Doctor</button>
+          </div>
+        )
+      case 1: //patient
+        return (
+          <div className="App">
+            <PatientView />
+          </div>
+          
+        )
+      case 2: //doctor
+        return (
+          <div className="App">
+            <h1 className='header'>Doctor</h1>
+            <DoctorView />
+          </div>
+        )
+    }
   }
 }
 

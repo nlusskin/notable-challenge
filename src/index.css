@@ -1,14 +1,301 @@
+@import url("https://fonts.googleapis.com/css?family=PT+Sans");
+* {
+  outline: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 8px;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+h1, h2, h3, p {
+  font-family: 'PT Sans';
+}
+
+.header {
+  height: 10vh;
+  width: 100vw;
+  background-color: #00c687;
+  margin: 0;
+  color: white;
+  border-radius: 0;
+  padding: 1%;
+}
+
+#chooseView, input, textarea, #patientListContainer #patientListItem, #doctorListItem #dContainer {
+  background: none;
+  border: 3px solid #00c687;
+  margin: 12px;
+  color: #00c687;
+  width: 30%;
+  height: 100px;
+  font-size: 28px;
+  -webkit-box-shadow: 4px 4px 18px 0px #e7e7e7;
+          box-shadow: 4px 4px 18px 0px #e7e7e7;
+}
+
+input[type="submit"]:active {
+  background-color: #00c687;
+  color: white;
+}
+
+input, textarea {
+  height: 50px;
+  min-width: 60%;
+  max-width: 60%;
+  border-width: 1px;
+  font-size: 14px;
+  padding: 10px;
+}
+
+@-webkit-keyframes sub {
+  0% {
+    background-color: #00c687;
+  }
+  /* 50% { background-color: #0788c0; } */
+  80% {
+    background-color: #00c687;
+  }
+  98% {
+    background-color: white;
+  }
+}
+
+@keyframes sub {
+  0% {
+    background-color: #00c687;
+  }
+  /* 50% { background-color: #0788c0; } */
+  80% {
+    background-color: #00c687;
+  }
+  98% {
+    background-color: white;
+  }
+}
+
+#submitNewPatient {
+  float: left;
+  width: 75%;
+}
+
+#submitNewPatient .submitSuccess {
+  color: white;
+  -webkit-animation: sub 2s linear;
+          animation: sub 2s linear;
+}
+
+#patientListContainer {
+  float: left;
+  width: 25%;
+  height: 100vh;
+  overflow-y: scroll;
+  background-color: white;
+  border-left: 1px solid #00c687;
+  border-radius: 0;
+  -webkit-box-shadow: -1px 0px 28px #e7e7e7;
+          box-shadow: -1px 0px 28px #e7e7e7;
+}
+
+#patientListContainer #patientListItem {
+  width: 90%;
+  border-width: 1px;
+  border-right-width: 4px;
+  height: 60px;
+}
+
+#patientListContainer #patientListItem div {
+  float: left;
+  width: 70%;
+}
+
+#patientListContainer #patientListItem div p {
+  font-size: 14px;
+  margin: 16px;
+}
+
+#patientListContainer #patientListItem div:nth-child(2) {
+  background-color: #00c687;
+  color: white;
+  height: 100%;
+  width: 30%;
+  margin: 0;
+  border-radius: 0;
+  -webkit-box-shadow: -2px 0px 0px #e7e7e7;
+          box-shadow: -2px 0px 0px #e7e7e7;
+}
+
+#patientListContainer #patientListItem div:nth-child(2) p {
+  font-size: 14px;
+}
+
+#modal {
+  position: absolute;
+  width: 50vw;
+  height: 45vh;
+  top: 22vh;
+  left: 25vw;
+  background-color: white;
+  z-index: 1000;
+  text-align: left;
+  overflow-y: scroll;
+}
+
+#modal p {
+  font-size: 14px;
+  margin: 4px 0 0 16px;
+  white-space: pre-wrap;
+}
+
+#modal img {
+  width: 48px;
+  margin: 10px;
+  float: left;
+}
+
+#modal button {
+  background-color: #00c687;
+  color: white;
+  height: 36px;
+  width: 36px;
+  border-radius: 90px;
+  margin: 19px 8px;
+  border: none;
+}
+
+#modal-bg {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  opacity: 0.55;
+  background-color: black;
+}
+
+#doctorListContainer {
+  min-width: 100vw;
+  min-height: 80vh;
+  margin: 10vh 0 0 0vw;
+  overflow-x: scroll;
+}
+
+#doctorListContainer td {
+  min-width: 20vw;
+  max-width: 20vw;
+  padding: 5px;
+  opacity: 0.4;
+}
+
+#doctorListContainer td:hover {
+  opacity: 1;
+}
+
+#doctorListContainer td:first-of-type {
+  opacity: 1 !important;
+}
+
+#doctorListContainer label {
+  color: #00c687;
+  float: left;
+  margin-left: 20px;
+}
+
+#doctorListItem {
+  width: 100%;
+  height: 45vh;
+  margin: 12px;
+  float: left;
+}
+
+#doctorListItem img {
+  width: 100%;
+  z-index: 1;
+  border-radius: 0;
+  /* border-bottom: 6px solid $front_color; */
+}
+
+#doctorListItem p {
+  font-size: 14px;
+  margin: 12px;
+  float: left;
+}
+
+#doctorListItem #dContainer {
+  width: 100%;
+  height: 50%;
+  border-top: none;
+  border-width: 1.5px;
+  border-radius: 0;
+  margin: 0;
+  z-index: 1000;
+  margin-top: -5px;
+}
+
+#doctorListItem #dView {
+  width: 80%;
+  height: 100%;
+  float: left;
+}
+
+#doctorListItem #dAction {
+  background-color: #00c687;
+  color: white;
+  height: 100%;
+  width: 20%;
+  z-index: 1000;
+  border-radius: 0;
+  float: right;
+}
+
+#doctorListItem button {
+  width: 100%;
+  height: 50%;
+  background: none;
+  color: white;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  font-size: 36px;
+}
+
+#doctorListItem button:first-of-type {
+  border-bottom: 1px solid white;
+}
+
+#doctorListItem button:hover {
+  background-color: #06b07a;
+}
+
+@media screen and (max-width: 700px) {
+  body {
+    overflow-y: scroll;
+  }
+  #chooseView, input, textarea, #patientListContainer #patientListItem, #doctorListItem #dContainer {
+    width: 80vw;
+  }
+  #patientListContainer {
+    width: 100vw;
+  }
+  #submitNewPatient {
+    width: 100vw;
+  }
+  #doctorListContainer td {
+    min-width: 80vw;
+    max-width: 80vw;
+  }
+  #modal {
+    width: 95vw;
+    height: 85vh;
+    top: 7vh;
+    left: 1.5vh;
+  }
 }
