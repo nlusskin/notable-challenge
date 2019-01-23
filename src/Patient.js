@@ -3,6 +3,8 @@ import Data from './Data';
  
 
 function List(p) {
+  if (p.i === null)
+    return (<p>No patient currently waiting</p>)
   return (
     <div id="patientListItem">
       <div><p>{p.i.fname} {p.i.lname}</p></div>
@@ -16,7 +18,7 @@ class PatientView extends Component {
 
   constructor(p) {
     super(p)
-    this.state = {listItems: [], fname: '', lname: '', email: '', desc: ''}
+    this.state = {listItems: [], currentItem: null, fname: '', lname: '', email: '', desc: ''}
     this.setState = this.setState.bind(this)
     this.submitNewPatient = this.submitNewPatient.bind(this)
     this.data = new Data(this, 0)
@@ -48,7 +50,7 @@ class PatientView extends Component {
             <input type='submit' value={this.state.submitSuccess ? "You're on the list!" : "Submit"} className={this.state.submitSuccess ? "submitSuccess" : ""} />
           </form>
           <div id='patientListContainer'>
-            {(this.state.listItems.length == 0) ? <h2>No Patients Currently Waiting</h2> : <div><h2>Current Patient:</h2><List i={this.state.listItems[0]} /><h2>Patients Currently Waiting:</h2> {this.state.listItems.slice(1).map(v => <List i={v} />)}</div>}
+            {(this.state.listItems.length == 0 && this.state.currentItem == null) ? <h2>No Patients Currently Waiting</h2> : <div><h2>Current Patient:</h2><List i={this.state.currentItem} /><h2>Patients Currently Waiting:</h2> {this.state.listItems.slice(this.state.currentItem != null ? 1:0).map(v => <List i={v} />)}</div>}
           </div>
         </div>
       )

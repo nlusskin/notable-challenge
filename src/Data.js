@@ -38,6 +38,12 @@ class Data {
         case 'pop':
           this.removePatient(msg)
           break
+        case 'current':
+          this.setCurrentPatient(msg)
+          break
+        case 'unsetCurrent':
+          this.removeCurrentPatient()
+          break
       }
     }
   }
@@ -55,9 +61,21 @@ class Data {
         return
       let arr = this.context.state.listItems
       arr.splice(i,1)
-      this.context.setState({listItems: arr})
+      this.context.setState({listItems: arr, currentItem: null})
     })
-    
+  }
+
+  setCurrentPatient(m = null, i = -1) {
+    if (m === null) {
+      this.context.setState({currentItem: null})
+      return
+    }
+    this.context.state.listItems.forEach(e => {
+      i++
+      if (e.key != m.key)
+        return
+      this.context.setState({currentItem: e})
+    })
   }
 
 
@@ -69,13 +87,14 @@ class Data {
   pop(key) {
     this.socket.send(`{"cmd": "pop", "key": "${key}"}`)
   }
+  setCurrent(key) {
+    this.socket.send(`{"cmd": "current", "key": "${key}"}`)
+  }
+  unsetCurrent(key) {
+    this.socket.send(`{"cmd": "unsetCurrent", "key": "${key}"}`)
+  }
 }
 
-function cleanDesc(d) {
-  return d.replace(/[]/g, c => {
-
-  })
-}
 
 function uuid() {
   return 'xxxxxxxx'.replace(/[xy]/g, c => {
