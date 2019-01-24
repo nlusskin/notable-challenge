@@ -1,3 +1,6 @@
+/* 
+    WebSocket mirror
+*/
 const WS = require('ws')
 const sqlite3 = require('sqlite3').verbose()
 let db = new sqlite3.Database(':memory:', (res, err) => console.error(err))
@@ -75,3 +78,28 @@ setInterval(() => {
   }, 28000)
 
   process.on('uncaughtException', exception => console.error(exception))
+
+
+
+/*
+    http server
+*/
+const express = require('express')
+const favicon = require('express-favicon')
+const path = require('path')
+
+const app = express()
+app.use(favicon(__dirname + '/build/favicon.ico'))
+// __dirname = directory from where the script is running
+app.use(express.static(__dirname))
+app.use(express.static(path.join(__dirname, 'build')))
+
+app.get('/ping', function (req, res) {
+ return res.send('pong')
+})
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
+
+app.listen(5000)

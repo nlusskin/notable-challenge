@@ -12,6 +12,7 @@ function List(p) {
   return (
     <td>
       <div id="doctorListItem">
+        <p id='time'>{p.i.time}</p>
         <img src={'/' + imgs[tk[p.i.key]]} />
         <div id='dContainer'>
           <div id='dView'>
@@ -39,6 +40,7 @@ function DescriptionModal(p) {
           <button onClick={() => { (p.i.key != p.c.state.currentItem.key || p.i.key != p.c.state.currentItem.key) ? alert('You must finish with the current patient first') : confirmRemove(p)}}>&#10004;</button>
           <button onClick={() => p.c.setState({descModal: {show: false}})}>&#10550;</button>
         </div><br></br>
+        <p><b>Checked in:</b> {p.i.time}</p><br></br>
         <p><b>Name:</b> {p.i.fname} {p.i.lname}</p><br></br>
         <p><b>Email:</b> {p.i.email}</p><br></br>
         <p><b>Description:</b> {p.i.desc.replace(/[\u21b5]/g,'\n')}</p><br></br>
